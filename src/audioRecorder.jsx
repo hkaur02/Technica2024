@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-const AudioRecorder = () => {
+
+const audioRecorder = () => {
     const [permission, setPermission] = useState(false);
     const [stream, setStream] = useState(null);
 
@@ -39,4 +40,4 @@ const AudioRecorder = () => {
         </div>
     );
 };
-export default AudioRecorder;
+export default audioRecorder;

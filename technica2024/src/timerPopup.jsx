@@ -6,13 +6,12 @@ const TimerPopup = () => {
   // Function to handle closing the alert
   const handleClose = () => {
     setShow(false);
-    window.alert("Alert closed");
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       setShow(true); // Show the alert every 30 seconds
-    }, 30000); // 30 seconds in milliseconds
+    }, 120000); // 2 mins in milliseconds
 
     return () => {
       clearInterval(interval); // Cleanup the interval when the component unmounts

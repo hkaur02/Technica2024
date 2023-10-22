@@ -1,21 +1,17 @@
-
 import { useState, useEffect } from 'react';
-import { Modal, Button } from 'react-bootstrap';
 
-function TimerPopup() {
+const TimerPopup = () => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const saveChanges = () => {
-    // Handle save action here
-    handleClose();
+  // Function to handle closing the alert
+  const handleClose = () => {
+    setShow(false);
+    window.alert("Alert closed");
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      handleShow(); // Open the popup every 30 seconds
+      setShow(true); // Show the alert every 30 seconds
     }, 30000); // 30 seconds in milliseconds
 
     return () => {
@@ -24,23 +20,20 @@ function TimerPopup() {
   }, []);
 
   return (
-    <Modal show={show} onHide={handleClose} animation={false}>
-      <Modal.Header closeButton>
-        <Modal.Title>Check In</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {/* Add the content for your popup here */}
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={saveChanges}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
-    </Modal>
+    <div>
+      {show && (
+        <div className="alert">
+          <h5 className="alert-title">Check In</h5>
+          <p>Check in with yourself and the presentation!</p>
+          <button className="btn btn-secondary" onClick={handleClose}>
+            Close
+          </button>
+        </div>
+      )}
+    </div>
   );
-}
+};
 
 export default TimerPopup;
+
+

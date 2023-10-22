@@ -1,16 +1,47 @@
-function BrickBreaker() {
-    //const gameContainer = document.getElementById("game-container");
-    const paddle = document.getElementById("paddle");
-    const ball = document.getElementById("ball");
-    const bricks = document.querySelectorAll(".brick");
 
+//import { useEffect } from 'react';
+
+const BrickBreaker = () => {
+    const bricks = [];
+
+    const gameContainer = document.getElementById("game-container");
+
+        // Define the dimensions and properties of the bricks
+        const brickWidth = 50;
+        const brickHeight = 20;
+        const brickRows = 3;
+        const brickCols = 8;
+
+        // Initialize the game board with bricks
+        
+        for (let row = 0; row < brickRows; row++) {
+            for (let col = 0; col < brickCols; col++) {
+                const brick = document.createElement("div");
+                brick.classList.add("brick");
+                brick.style.width = `${brickWidth}px`;
+                brick.style.height = `${brickHeight}px`;
+                brick.style.top = `${row * brickHeight}px`;
+                brick.style.left = `${col * brickWidth}px`;
+                gameContainer.appendChild(brick);
+                bricks.push(brick);
+            }
+        }
+
+
+    // The rest of your game logic (e.g., updateGame function, event listeners) here
     let ballX = 200;
     let ballY = 300;
     let ballSpeedX = 5;
     let ballSpeedY = -5;
     let paddleX = 160;
+    const updateGame = () => {
 
-    function updateGame() {
+        
+
+        const paddle = document.getElementById("paddle");
+        const ball = document.getElementById("ball");
+
+
         // Move the ball
         ballX += ballSpeedX;
         ballY += ballSpeedY;
@@ -48,31 +79,53 @@ function BrickBreaker() {
         }
     
         // Check for win condition (no visible bricks left)
+        /*
         let remainingBricks = Array.from(bricks).filter((brick) => brick.style.display !== 'none');
         if (remainingBricks.length === 0) {
             alert("You Win!");
             document.location.reload();
         }
+        */
     
         // Update the ball and paddle positions
         ball.style.left = ballX + "px";
         ball.style.top = ballY + "px";
         paddle.style.left = paddleX + "px";
     
-        requestAnimationFrame(updateGame);
+        
     }
+        requestAnimationFrame(updateGame);
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowLeft" && paddleX > 0) {
+                paddleX -= 10;
+            }
+            if (event.key === "ArrowRight" && paddleX < 320) {
+                paddleX += 10;
+            }
+        });
+    
+        updateGame();
     
 
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "ArrowLeft" && paddleX > 0) {
-            paddleX -= 10;
-        }
-        if (event.key === "ArrowRight" && paddleX < 320) {
-            paddleX += 10;
-        }
-    });
+    return (
+        <div>
+        <h1>Welcome to My Brick Breaker Game</h1>
+        <p>Instructions: Use the left and right arrow keys to move the paddle and bounce the ball.</p>
+        <div id="game-container">
 
-    updateGame();
-}
+        <div id="paddle"></div>
+        <div className="brick" style="top: 50px; left: 50px;"></div>
+        <div className="brick" style="top: 50px; left: 120px;"></div>
+        <div className="brick" style="top: 50px; left: 190px;"></div>
+        <div className="brick" style="top: 50px; left: 260px;"></div>
+        <div id="ball"></div>
+        </div>
+
+        </div>
+
+    );
+};
+
 
 export default BrickBreaker;

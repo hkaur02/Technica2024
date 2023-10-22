@@ -38,19 +38,6 @@ h1 {
 
 textarea { font-size: 20px; }
 
-.toolbar {
-  display: flex;
-}
-.toolbar-button {
-  box-sizing: border-box;
-  padding: 0px;
-  width: 1.8em;
-  height: 1.8em;
-}
-#btnLink {
-  margin-left: .6em;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
